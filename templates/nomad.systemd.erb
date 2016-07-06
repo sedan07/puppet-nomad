@@ -4,6 +4,8 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+User=<%= scope.lookupvar('nomad::user') %>
+Group=<%= scope.lookupvar('nomad::group') %>
 EnvironmentFile=-/etc/sysconfig/nomad
 Restart=on-failure
 ExecStart=<%= scope.lookupvar('nomad::bin_dir') %>/nomad agent -config=<%= scope.lookupvar('nomad::config_dir') %> <%= scope.lookupvar('nomad::extra_options') %>
